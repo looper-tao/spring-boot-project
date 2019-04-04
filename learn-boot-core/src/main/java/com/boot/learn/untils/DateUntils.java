@@ -97,8 +97,60 @@ public class DateUntils {
         return Date.from(LocalDateTime.of(getCurrentDate(), LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
     }
     
+    /**
+     * 昨天的开始
+     * @return
+     */
+    public static Date yesterdayBegin() {
+        return Date.from(LocalDateTime.of(getCurrentDate().plusDays(-1L), LocalTime.MIN).atZone(ZoneId.systemDefault()).toInstant());
+    }
+    
+    /**
+     * 昨天的结束
+     * @return
+     */
+    public static Date yesterdayEnd(){
+        return Date.from(LocalDateTime.of(getCurrentDate().plusDays(-1L), LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
+    }
+    
+    /**
+     * 明天的开始
+     * @return
+     */
+    public static Date tomorrowBegin() {
+        return Date.from(LocalDateTime.of(getCurrentDate().plusDays(1L), LocalTime.MIN).atZone(ZoneId.systemDefault()).toInstant());
+    }
+    
+    /**
+     * 明天的结束
+     * @return
+     */
+    public static Date tomorrowEnd(){
+        return Date.from(LocalDateTime.of(getCurrentDate().plusDays(1L), LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
+    }
+    
+    /**
+     * 一天的开始
+     * @param date 指定日期
+     * @return
+     */
+    public static Date startTime(Date date){
+        return Date.from(LocalDateTime.of(LocalDateTime.ofInstant(date.toInstant(),ZoneId.systemDefault()).toLocalDate(), LocalTime.MIN).atZone(ZoneId.systemDefault()).toInstant());
+    }
+    
+    /**
+     * 当天的结束
+     * @param date
+     * @return
+     */
+    public static Date endTime(Date date){
+        return Date.from(LocalDateTime.of(LocalDateTime.ofInstant(date.toInstant(),ZoneId.systemDefault()).toLocalDate(), LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
+    }
+    
+    
     public static void main(String[] args) {
-        System.out.println(todayBegin());
+        
+        System.out.println(endTime(parseDate("2018-03-15 00:00:00",DateTimeFormatterEnum.FORMAT_DATE_TIME_STYLE_1)));
     }
     
     
