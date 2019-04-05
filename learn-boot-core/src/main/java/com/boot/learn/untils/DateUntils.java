@@ -2,11 +2,9 @@ package com.boot.learn.untils;
 
 import lombok.Getter;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 
 /**
@@ -99,6 +97,7 @@ public class DateUntils {
     
     /**
      * 昨天的开始
+     *
      * @return
      */
     public static Date yesterdayBegin() {
@@ -107,14 +106,16 @@ public class DateUntils {
     
     /**
      * 昨天的结束
+     *
      * @return
      */
-    public static Date yesterdayEnd(){
+    public static Date yesterdayEnd() {
         return Date.from(LocalDateTime.of(getCurrentDate().plusDays(-1L), LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
     }
     
     /**
      * 明天的开始
+     *
      * @return
      */
     public static Date tomorrowBegin() {
@@ -123,34 +124,138 @@ public class DateUntils {
     
     /**
      * 明天的结束
+     *
      * @return
      */
-    public static Date tomorrowEnd(){
+    public static Date tomorrowEnd() {
         return Date.from(LocalDateTime.of(getCurrentDate().plusDays(1L), LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
     }
     
     /**
-     * 一天的开始
+     * 指定天的开始
+     *
      * @param date 指定日期
      * @return
      */
-    public static Date startTime(Date date){
-        return Date.from(LocalDateTime.of(LocalDateTime.ofInstant(date.toInstant(),ZoneId.systemDefault()).toLocalDate(), LocalTime.MIN).atZone(ZoneId.systemDefault()).toInstant());
+    public static Date startTime(Date date) {
+        return Date.from(LocalDateTime.of(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).toLocalDate(), LocalTime.MIN).atZone(ZoneId.systemDefault()).toInstant());
     }
     
     /**
-     * 当天的结束
+     * 指定天的结束
+     *
      * @param date
      * @return
      */
-    public static Date endTime(Date date){
-        return Date.from(LocalDateTime.of(LocalDateTime.ofInstant(date.toInstant(),ZoneId.systemDefault()).toLocalDate(), LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
+    public static Date endTime(Date date) {
+        return Date.from(LocalDateTime.of(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).toLocalDate(), LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
     }
     
+    /**
+     * 当月的第一天
+     *
+     * @return
+     */
+    public static Date monthBegin() {
+        return Date.from(LocalDateTime.of(getCurrentDate().with(TemporalAdjusters.firstDayOfMonth()), LocalTime.MIN).atZone(ZoneId.systemDefault()).toInstant());
+    }
     
-    public static void main(String[] args) {
-        
-        System.out.println(endTime(parseDate("2018-03-15 00:00:00",DateTimeFormatterEnum.FORMAT_DATE_TIME_STYLE_1)));
+    /**
+     * 当月的最后一天
+     *
+     * @return
+     */
+    public static Date monthEnd() {
+        return Date.from(LocalDateTime.of(getCurrentDate().with(TemporalAdjusters.lastDayOfMonth()), LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
+    }
+    
+    /**
+     * 指定月的第一天
+     *
+     * @param date
+     * @return
+     */
+    public static Date theMonthBegin(Date date) {
+        return Date.from(LocalDateTime.of(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).with(TemporalAdjusters.firstDayOfMonth()).toLocalDate(), LocalTime.MIN).atZone(ZoneId.systemDefault()).toInstant());
+    }
+    
+    /**
+     * 指定月的最后一天
+     *
+     * @param date
+     * @return
+     */
+    public static Date theMonthEnd(Date date) {
+        return Date.from(LocalDateTime.of(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).with(TemporalAdjusters.lastDayOfMonth()).toLocalDate(), LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
+    }
+    
+    /**
+     * 指定年的第一天
+     *
+     * @param date
+     * @return
+     */
+    public static Date theYearBegin(Date date) {
+        return Date.from(LocalDateTime.of(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).with(TemporalAdjusters.firstDayOfYear()).toLocalDate(), LocalTime.MIN).atZone(ZoneId.systemDefault()).toInstant());
+    }
+    
+    /**
+     * 指定年的第一天
+     *
+     * @param date
+     * @return
+     */
+    public static Date theYearEnd(Date date) {
+        return Date.from(LocalDateTime.of(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).with(TemporalAdjusters.lastDayOfYear()).toLocalDate(), LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
+    }
+    
+    /**
+     * 判断传入时间是否是今天
+     *
+     * @param date
+     * @return
+     */
+    public static Boolean checkIsToday(Date date) {
+        return getCurrentDate().equals(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).toLocalDate());
+    }
+    
+    /**
+     * 计算一段时间的间隔
+     * duration.toDays() 计算这段时间的总天数(满24小时为1天)
+     * duration.toHours() 计算这段时间的总小时数(满60分钟为1小时)
+     * duration.toMinutes() 计算这段时间的总分钟数(满60秒为1分钟)
+     * duration.getSeconds() 计算这段时间的总秒数(满1000毫秒为1秒)
+     * duration.toMillis() 计算这段时间的总毫秒数
+     * duration.toNanos() 计算这段时间的总纳秒数
+     *
+     * @param beginTime 开始时间
+     * @param endTime   结束时间
+     * @return
+     */
+    public static Duration between(Date beginTime, Date endTime) {
+        LocalDateTime beginLocalDateTime = LocalDateTime.ofInstant(beginTime.toInstant(), ZoneId.systemDefault());
+        LocalDateTime endLocalDateTime = LocalDateTime.ofInstant(endTime.toInstant(), ZoneId.systemDefault());
+        return Duration.between(beginLocalDateTime, endLocalDateTime);
+    }
+    
+    /**
+     * 指定日期的几天前
+     * @param date 指定日期
+     * @param num 向前的天数
+     * @return
+     */
+    public static Date theDayBefor(Date date, long num) {
+        return Date.from(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).minusDays(num).atZone(ZoneId.systemDefault()).toInstant());
+    }
+    
+    /**
+     * 指定日期的几天后
+     * @param date 指定日期
+     * @param num 向后的天数
+     * @return
+     */
+    public static Date theDayLater(Date date, long num){
+        return Date.from(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).plusDays(num).atZone(ZoneId.systemDefault()).toInstant());
     }
     
     
