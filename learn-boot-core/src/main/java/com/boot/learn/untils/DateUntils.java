@@ -257,6 +257,7 @@ public class DateUntils {
     public static Date theDayLater(Date date, long num){
         return Date.from(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).plusDays(num).atZone(ZoneId.systemDefault()).toInstant());
     }
+
     
     
     /**
@@ -264,11 +265,11 @@ public class DateUntils {
      */
     public enum DateTimeFormatterEnum {
         /**
-         * yyyy/MM/dd
+         * yyyy/MM/dd (仅格式化时间可用)
          */
         FORMAT_DATE_STYLE_1("yyyy/MM/dd", DateTimeFormatter.ofPattern("yyyy/MM/dd")),
         /**
-         * yyyy-MM-dd
+         * yyyy-MM-dd (仅格式化时间可用)
          */
         FORMAT_DATE_STYLE_2("yyyy-MM-dd", DateTimeFormatter.ofPattern("yyyy-MM-dd")),
         /**
