@@ -1,6 +1,7 @@
 package com.boot.learn.service;
 
 import com.boot.learn.entity.Student;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,7 @@ public class StudentServiceTest {
     
     @Test
     public void Test(){
-        List<Student> students = studentService.quertDslTest();
-        
-        System.out.println(students);
+        studentService.multipleColumnQuery();
+    
     }
 }

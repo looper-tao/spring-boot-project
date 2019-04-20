@@ -32,6 +32,9 @@ public class Student extends PkNativeID {
     @Column(name = "remark")
     private String reamrk;
     
+    @Column(name = "score")
+    private Integer score;
+    
     @Column(name = "create_at")
     private Date createAt;
 }
