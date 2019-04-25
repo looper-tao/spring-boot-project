@@ -24,7 +24,7 @@ public class StudentServiceTest {
     
     @Test
     public void Test(){
-        studentService.multipleColumnQuery();
+        studentService.test();
     
     }
 }

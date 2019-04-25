@@ -4,9 +4,19 @@ import com.boot.learn.entity.QSchool;
 import com.boot.learn.entity.QStudent;
 import com.boot.learn.entity.School;
 import com.boot.learn.entity.Student;
+import com.boot.learn.model.StudentDTO;
+import com.boot.learn.untils.DateUntils;
+import com.boot.learn.untils.KJsonUtils;
+import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.CaseBuilder;
+import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.core.types.dsl.StringExpression;
 import com.querydsl.jpa.JPAExpressions;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import javafx.scene.SubScene;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,10 +33,6 @@ import java.util.List;
 public class StudentService {
     @Autowired
     private JPAQueryFactory queryFactory;
-    
-//    @Autowired
-//    private JDOQueryFactory jdoQueryFactory;
-//
     
     public List<Student> quertDslTest() {
         List<Student> studentList = queryFactory.select(QStudent.student)
@@ -74,7 +80,7 @@ public class StudentService {
     }
     
     /**
-     * oder
+     * order
      * <p>
      * sql:
      * <p>
@@ -188,7 +194,7 @@ public class StudentService {
      * select student0_.id as id1_1_, student0_.age as age2_1_, student0_.birthday as birthday3_1_, student0_.create_at as create_a4_1_, student0_.name as name5_1_, student0_.remark as remark6_1_,
      * student0_.school_id as school_i7_1_, student0_.score as score8_1_ from t_person student0_
      */
-    public void originalQuery() {
+    public void originalQueryTest() {
         QStudent student = QStudent.student;
         Query query = queryFactory.selectFrom(student)
             .createQuery();
@@ -198,14 +204,14 @@ public class StudentService {
     
     /**
      * single column query
-     *
+     * <p>
      * sql:
-     *
+     * <p>
      * SELECT student0_.name AS col_0_0_
      * FROM t_person student0_
      * WHERE student0_.score > 90
      */
-    public void singleColumnQuery() {
+    public void singleColumnQueryTest() {
         QStudent student = QStudent.student;
         
         List<String> studentNameList = queryFactory.select(student.name)
@@ -219,15 +225,15 @@ public class StudentService {
     
     /**
      * multiple column query
-     *
+     * <p>
      * sql:
-     *
+     * <p>
      * SELECT school1_.name AS col_0_0_, student0_.name AS col_1_0_, student0_.score AS col_2_0_
      * FROM t_person student0_
-     * 	INNER JOIN t_school school1_ ON student0_.school_id = school1_.id
+     * INNER JOIN t_school school1_ ON student0_.school_id = school1_.id
      * WHERE student0_.score > 90
      */
-    public void multipleColumnQuery() {
+    public void multipleColumnQueryTest() {
         QStudent student = QStudent.student;
         QSchool school = QSchool.school;
         
@@ -240,10 +246,141 @@ public class StudentService {
             .fetch();
         
         tupleList.stream().forEach(tuple -> {
-            System.out.println("schoolName = " + tuple.get(school.name)+"     studentName = " + tuple.get(student.name) + "      studentScore = " + tuple.get(student.score));
+            System.out.println("schoolName = " + tuple.get(school.name) + "     studentName = " + tuple.get(student.name) + "      studentScore = " + tuple.get(student.score));
         });
     }
     
     
+    /**
+     * limit
+     * <p>
+     * 查询前几个的结果
+     * <p>
+     * sql:
+     * <p>
+     * SELECT student0_.id AS id1_1_, student0_.age AS age2_1_, student0_.birthday AS birthday3_1_, student0_.create_at AS create_a4_1_, student0_.name AS name5_1_
+     * , student0_.remark AS remark6_1_, student0_.school_id AS school_i7_1_, student0_.score AS score8_1_
+     * FROM t_person student0_
+     * LIMIT 2
+     */
+    public void limitTest() {
+        QStudent student = QStudent.student;
+        
+        List<Student> studentList = queryFactory.select(student)
+            .from(student)
+            .limit(2)
+            .fetch();
+        
+        System.out.println(studentList);
+    }
     
+    
+    /**
+     * offset
+     * <p>
+     * 查询第几个之后的结果
+     */
+    public void offsetTest() {
+        QStudent student = QStudent.student;
+        
+        List<Student> studentList = queryFactory.select(student)
+            .from(student)
+            .offset(0)
+            .fetch();
+        
+        System.out.println(KJsonUtils.toJson(studentList));
+    }
+    
+    
+    /**
+     * page
+     * <p>
+     * sql:
+     * <p>
+     * SELECT student0_.id AS id1_1_, student0_.age AS age2_1_, student0_.birthday AS birthday3_1_, student0_.create_at AS create_a4_1_, student0_.name AS name5_1_
+     * , student0_.remark AS remark6_1_, student0_.school_id AS school_i7_1_, student0_.score AS score8_1_
+     * FROM t_person student0_
+     * ORDER BY student0_.create_at DESC
+     * LIMIT 1,5
+     */
+    public void pageQueryTest() {
+        QStudent student = QStudent.student;
+        
+        QueryResults<Student> studentQueryResults = queryFactory.select(student)
+            .from(student)
+            .orderBy(student.createAt.desc())
+            .offset(0L)
+            .limit(5L)
+            .fetchResults();
+        System.out.println(studentQueryResults.getResults());
+        System.out.println("total = " + studentQueryResults.getTotal());
+        System.out.println("limit = " + studentQueryResults.getLimit());
+        System.out.println("offset = " + studentQueryResults.getOffset());
+    }
+    
+    
+    /**
+     * constructor
+     * <p>
+     * sql:
+     * <p>
+     * SELECT
+     * school1_.NAME AS col_0_0_,
+     * student0_.NAME AS col_1_0_,
+     * student0_.score AS col_2_0_
+     * FROM
+     * t_person student0_
+     * LEFT OUTER JOIN t_school school1_ ON ( student0_.school_id = school1_.id )
+     */
+    public void constructorTest() {
+        QStudent student = QStudent.student;
+        QSchool school = QSchool.school;
+        
+        List<StudentDTO> studentDTOList = queryFactory.select(Projections.constructor(StudentDTO.class, school.name, student.name, student.score))
+            .from(student)
+            .leftJoin(school).on(student.schoolId.eq(school.id))
+            .fetch();
+        
+        System.out.println(KJsonUtils.toJson(studentDTOList));
+    }
+    
+    /**
+     * case expressions(when ... then ...)
+     * <p>
+     * sql
+     * <p>
+     * SELECT student0_.NAME AS col_0_0_
+     * , CASE
+     * WHEN student0_.score >= 0
+     * AND student0_.score <= 10 THEN "喊家长"
+     * WHEN student0_.score >= 11
+     * AND student0_.score <= 49 THEN "习题抄5遍"
+     * WHEN student0_.score >= 50
+     * AND student0_.score <= 79 THEN "还需继续努力!!!"
+     * WHEN student0_.score >= 80
+     * AND student0_.score <= 99 THEN "继续加油!!!"
+     * ELSE '恭喜满分!!!'
+     * END AS col_1_0_
+     * FROM t_person student0_
+     */
+    public void caseExpressionsTest() {
+        QStudent student = QStudent.student;
+        
+        StringExpression sourceExpression = new CaseBuilder()
+            .when(student.score.goe(0).and(student.score.loe(10))).then("喊家长!!!")
+            .when(student.score.goe(11).and(student.score.loe(49))).then("习题抄5遍")
+            .when(student.score.goe(50).and(student.score.loe(79))).then("还需继续努力!!!")
+            .when(student.score.goe(80).and(student.score.loe(99))).then("继续加油!!!")
+            .otherwise("恭喜满分!!!");
+        
+        
+        
+        List<Tuple> tupleList = queryFactory.select(student.name, sourceExpression).from(student).fetch();
+        
+        tupleList.stream().forEach(tuple -> {
+            System.out.println("name = " + tuple.get(student.name) + "       " + tuple.get(sourceExpression));
+        });
+    }
+    
+   
 }
