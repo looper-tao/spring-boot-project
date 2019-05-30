@@ -58,6 +58,13 @@
             <artifactId>querydsl-jdo</artifactId>
             <version>${querydsl.version}</version>
         </dependency>
+
+        <!--alibaba easyexcel-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>1.1.2-beta5</version>
+        </dependency>
     </dependencies>
 
     <repositories>

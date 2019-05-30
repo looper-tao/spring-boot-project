@@ -5,7 +5,7 @@ import com.boot.learn.entity.QStudent;
 import com.boot.learn.entity.School;
 import com.boot.learn.entity.Student;
 import com.boot.learn.model.StudentDTO;
-import com.boot.learn.untils.DateUntils;
+import com.boot.learn.repository.StudentRepository;
 import com.boot.learn.untils.KJsonUtils;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
@@ -14,9 +14,7 @@ import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.StringExpression;
 import com.querydsl.jpa.JPAExpressions;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import javafx.scene.SubScene;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +31,10 @@ import java.util.List;
 public class StudentService {
     @Autowired
     private JPAQueryFactory queryFactory;
+    
+    @Autowired
+    private StudentRepository studentRepository;
+    
     
     public List<Student> quertDslTest() {
         List<Student> studentList = queryFactory.select(QStudent.student)
@@ -382,5 +384,42 @@ public class StudentService {
         });
     }
     
-   
+    /**
+     * expressions
+     *
+     * sql:
+     *
+     * SELECT
+     * 	student0_.NAME AS col_0_0_,
+     * 	date_format( student0_.birthday, '%Y-%m-%d' ) AS col_1_0_
+     * FROM
+     * 	t_person student0_
+     */
+    public void expressionsTest() {
+        QStudent student = QStudent.student;
+        
+        List<Tuple> tupleList = queryFactory.select(student.name, Expressions.stringTemplate("DATE_FORMAT({0},'%Y-%m-%d')", student.birthday))
+            .from(student)
+            .fetch();
+        
+        tupleList.stream().forEach(tuple -> {
+            System.out.println("name = " + tuple.get(student.name) + "     birthday = "
+                + tuple.get(Expressions.stringTemplate("DATE_FORMAT({0},'%Y-%m-%d')", student.birthday)));
+        });
+    }
+    
+    
+    public String test(){
+        System.out.println("SUCCESS!!!");
+        
+        return "SUCCESS!!!";
+    }
+    
+//    public void QueryDslPredicateExecutorTest(){
+//        QStudent student = QStudent.student;
+//
+//        Iterable<Student> studentIterable = studentRepository.findAll(student.name.eq("马小跳"));
+//
+//        studentIterable.forEach(student1 -> System.out.println(KJsonUtils.toJson(student1)));
+//    }
 }
