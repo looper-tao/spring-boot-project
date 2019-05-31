@@ -23,9 +23,18 @@ public class EasyExcellServiceTest {
     private EasyExcelService easyExcelService;
     
     @Test
-    public void writeTest(){
+    public void write1Test(){
         try {
-            easyExcelService.writeExcel();
+            easyExcelService.writeExcel1();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @Test
+    public void write2Test(){
+        try {
+            easyExcelService.writeExcel2();
         } catch(IOException e) {
             e.printStackTrace();
         }
