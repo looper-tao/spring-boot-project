@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.boot.learn"})
+@ComponentScan(basePackages = {"com.boot.learn","com.boot.learn.config"})
 @Configuration
 @EntityScan(basePackages = {"com.boot.learn.entity"})
 @EnableJpaRepositories(basePackages = {"com.boot.learn.repository"})

@@ -52,24 +52,25 @@ public class ExcelHandleService {
         
         String firstCode = null;
         String firstContent = null;
+        String firstCell = null;
         
         String secondCode = null;
         String secondContent = null;
+        String secondCell = null;
         
         String thirdCode = null;
         String thirdContent = null;
+        String thirdCell = null;
         
         String fourthCode = null;
         String fourthContent = null;
+        String fourthCell = null;
         
         int firstKey = 0;
         int secondKey = 0;
         int thirdKey = 0;
         int fourthKey = 0;
-        int firstIndex = 0;
-        int secondIndex = 0;
-        int threadIndex = 0;
-        int fourthIndex = 0;
+        int index = 0;
     
         String firstTemp = null;
         String secondTemp = null;
@@ -79,122 +80,131 @@ public class ExcelHandleService {
         for(int i = 2; i < 2200; i++) {
             
             String firstValue = StringUtils.replaceBlank(sheet.getCell(0, i).getContents().trim());
+            
             String secondValue = sheet.getCell(1, i).getContents().trim();
-            ;
+            
             String thirdValue = sheet.getCell(2, i).getContents().trim();
-            ;
+            
             String fourthValue = sheet.getCell(3, i).getContents().trim();
-            ;
+            
             String fifth = sheet.getCell(4, i).getContents().trim();
-            ;
+            
             String sixthValue = sheet.getCell(5, i).getContents().trim();
             
             
-            if(firstValue != null && !firstValue.isEmpty()) {
+            if(firstValue != null && !firstValue.isEmpty() && !firstValue.equals(firstCell)) {
                 firstCode = firstValue.substring(4, 5);
                 firstContent = firstValue.substring(5);
-                
-                firstIndex++;
+    
+                index++;
                 firstKey++;
                 
                 StringBuilder sb = new StringBuilder();
-                sb = sb.append("INSERT INTO `scorpio_paas`.`t_prop` (`clazz`, `code`, `index_`, `key_`, `pcode`, `remark`, `tenant_id`, `value_`, `visible` ) " +
+                sb = sb.append("INSERT INTO `t_prop` (`clazz`, `code`, `index_`, `key_`, `pcode`, `remark`, `tenant_id`, `value_`, `visible` ) " +
                     "VALUES ('job',");
     
                 firstTemp = String.format("%04d",firstKey);
                 
                 sb.append("'" + firstTemp + "',");
-                sb.append(firstIndex+",");
+                sb.append(index+",");
                 sb.append("'" + firstCode + "',");
                 sb.append("0000,");
                 sb.append("NULL,");
                 sb.append("6,");
                 sb.append("'" + firstContent + "',");
-                sb.append("b '1');\n");
+                sb.append("1);\n");
                 
                 sbList.add(sb);
+                firstCell = firstValue;
+                secondKey = 0;
                 
             }
-            if(secondValue != null && !secondValue.isEmpty()) {
+            if(secondValue != null && !secondValue.isEmpty() && !secondValue.equals(secondCell)) {
                 
                 secondCode = secondValue.substring(0, 3);
-                ;
+                
                 secondContent = secondValue.substring(3);
-                ;
+                
                 
                 secondKey++;
-                secondIndex++;
+                index++;
                 
                 StringBuilder sb = new StringBuilder();
-                sb = sb.append("INSERT INTO `scorpio_paas`.`t_prop` (`clazz`, `code`, `index_`, `key_`, `pcode`, `remark`, `tenant_id`, `value_`, `visible` ) " +
+                sb = sb.append("INSERT INTO `t_prop` (`clazz`, `code`, `index_`, `key_`, `pcode`, `remark`, `tenant_id`, `value_`, `visible` ) " +
                     "VALUES ('job',");
     
                 secondTemp = String.format("%04d",secondKey);
                 
                 sb.append("'" + firstTemp + secondTemp + "',");
-                sb.append(secondIndex+",");
+                sb.append(index+",");
                 sb.append("'" + secondCode + "',");
                 sb.append("'" + firstTemp + "',");
                 sb.append("NULL,");
                 sb.append("6,");
                 sb.append("'" + secondContent + "',");
-                sb.append("b '1');\n");
+                sb.append("1);\n");
                 
                 sbList.add(sb);
                 
+                secondCell = secondValue;
+                thirdKey = 0;
+                
             }
             
-            if(thirdValue != null && !thirdValue.isEmpty()) {
+            if(thirdValue != null && !thirdValue.isEmpty() && !thirdValue.equals(thirdCell)) {
                 
                 thirdCode = thirdValue.substring(0, 5);
                 thirdContent = thirdValue.substring(5);
-                
-                
-                threadIndex++;
+    
+    
+                index++;
                 thirdKey++;
                 
                 StringBuilder sb = new StringBuilder();
-                sb = sb.append("INSERT INTO `scorpio_paas`.`t_prop` (`clazz`, `code`, `index_`, `key_`, `pcode`, `remark`, `tenant_id`, `value_`, `visible` ) " +
+                sb = sb.append("INSERT INTO `t_prop` (`clazz`, `code`, `index_`, `key_`, `pcode`, `remark`, `tenant_id`, `value_`, `visible` ) " +
                     "VALUES ('job',");
     
                 thirdTemp = String.format("%04d",thirdKey);
                 
                 sb.append("'" + firstTemp+secondTemp+thirdTemp + "',");
-                sb.append(fourthIndex+",");
+                sb.append(index+",");
                 sb.append("'" + thirdCode + "',");
                 sb.append("'" + firstTemp+secondTemp + "',");
                 sb.append("NULL,");
                 sb.append("6,");
                 sb.append("'" + thirdContent + "',");
-                sb.append("b '1');\n");
+                sb.append("1);\n");
                 
                 sbList.add(sb);
+                
+                thirdCell = thirdValue;
+                fourthKey = 0;
             }
             
-            if(fourthValue != null && !fourthValue.isEmpty()) {
+            if(fourthValue != null && !fourthValue.isEmpty() && !fourthValue.equals(fourthCell)) {
                 fourthCode = fourthValue.substring(0, 7);
                 fourthContent = fourthValue.substring(7);
-                
-                fourthIndex++;
+    
+                index++;
                 fourthKey++;
                 
                 StringBuilder sb = new StringBuilder();
-                sb = sb.append("INSERT INTO `scorpio_paas`.`t_prop` (`clazz`, `code`, `index_`, `key_`, `pcode`, `remark`, `tenant_id`, `value_`, `visible` ) " +
+                sb = sb.append("INSERT INTO `t_prop` (`clazz`, `code`, `index_`, `key_`, `pcode`, `remark`, `tenant_id`, `value_`, `visible` ) " +
                     "VALUES ('job',");
     
                 fourthTemp = String.format("%04d",fourthKey);
                 
                 sb.append("'" + firstTemp+secondTemp+thirdTemp+fourthTemp + "',");
-                sb.append(fourthIndex+",");
+                sb.append(index+",");
                 sb.append("'" + fourthCode + "',");
                 sb.append("'" + firstTemp+secondTemp+thirdTemp + "',");
                 sb.append("NULL,");
                 sb.append("6,");
     
-                int index = fourthContent.indexOf("(旧)");
+                int indexOf = fourthContent.indexOf("(旧)");
                 
-                sb.append("'" + (index == -1 ? fourthContent:fourthContent.substring(0,index)) + "',");
-                sb.append("b '1');\n");
+                sb.append("'" + (indexOf == -1 ? fourthContent:fourthContent.substring(0,indexOf)) + "',");
+                sb.append("1);\n");
     
     
     
@@ -208,6 +218,8 @@ public class ExcelHandleService {
                 
                 
                 sbList.add(sb);
+                
+                fourthCell = fourthValue;
                 
             }
             
