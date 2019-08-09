@@ -5,7 +5,7 @@ spring:
       ddl-auto: update
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://101.200.59.148:3306/develop?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://127.0.0.1:3306/develop?useUnicode=true&?useSSL=false&characterEncoding=UTF-8
     username: root
     password: '!@#456Poiuy'
     type: com.zaxxer.hikari.HikariDataSource
@@ -19,21 +19,14 @@ spring:
       dle-timeout: 30000
       maximum-pool-size: 15
       connection-init-sql: "SET NAMES utf8mb4"
-  devtools:
-    restart:
-      additional-paths: src/main/java
-logging:
-  level:
-    org:
-      springframework:
-        boot:
-          autoconfigure: ERROR
 server:
   port: 38888
+logging:
+  config: classpath:logback.xml
 
 user:
   name: "马小跳"
   age: 10
   school: "向阳小学"
-  subject: 语文,数学,英语
-  achievement: {"language":10,"math":20,"english":30}
+  subject: "语文","数学","英语"
+  achievement: ["language":10,"math":20,"english":30]

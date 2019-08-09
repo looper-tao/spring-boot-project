@@ -12,8 +12,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("boot/test")
 public class TestController {
-    @RequestMapping(value = "",method = RequestMethod.GET)
-    public String test(){
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String test() {
         return "SUCCESS";
     }
     
