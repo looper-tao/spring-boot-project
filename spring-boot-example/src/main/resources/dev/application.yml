@@ -5,7 +5,7 @@ spring:
       ddl-auto: update
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/develop?useUnicode=true&?useSSL=false&characterEncoding=UTF-8
+    url: jdbc:mysql://127.0.0.1:3306/mybatis_practice?useUnicode=true&?useSSL=false&characterEncoding=UTF-8
     username: root
     password: '!@#456Poiuy'
     type: com.zaxxer.hikari.HikariDataSource

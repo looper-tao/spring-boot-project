@@ -15,30 +15,30 @@ import java.util.List;
  */
 @Service
 public class PropertiesService {
-    @Value("${user.name}")
-    private String name;
-
-    @Value("${user.age}")
-    private Integer age;
-
-    @Value("${user.school}")
-    private String school;
-    
-    @Value("#{'${user.subject}'.split(',')}")
-    private List<String> subject;
-    
-    
-    @Autowired
-    private PropertiesConfig propertiesConfig;
-    
-    public void propertiesTest() {
-        System.out.println("name = " + name);
-        System.out.println("age = " + age);
-        System.out.println("school = " + school);
-        System.out.println("subject = " + KJsonUtils.toJson(subject));
-    }
-    
-    public void propertiesConfigTest() {
-        System.out.println("propertiesConfig = " + KJsonUtils.toJson(propertiesConfig));
-    }
+//    @Value("${user.name}")
+//    private String name;
+//
+//    @Value("${user.age}")
+//    private Integer age;
+//
+//    @Value("${user.school}")
+//    private String school;
+//
+//    @Value("#{'${user.subject}'.split(',')}")
+//    private List<String> subject;
+//
+//
+//    @Autowired
+//    private PropertiesConfig propertiesConfig;
+//
+//    public void propertiesTest() {
+//        System.out.println("name = " + name);
+//        System.out.println("age = " + age);
+//        System.out.println("school = " + school);
+//        System.out.println("subject = " + KJsonUtils.toJson(subject));
+//    }
+//
+//    public void propertiesConfigTest() {
+//        System.out.println("propertiesConfig = " + KJsonUtils.toJson(propertiesConfig));
+//    }
 }

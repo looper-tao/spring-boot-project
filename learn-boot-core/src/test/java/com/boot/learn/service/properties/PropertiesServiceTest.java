@@ -18,14 +18,14 @@ public class PropertiesServiceTest {
     @Autowired
     private PropertiesService propertiesService;
     
-    @Test
-    public void propertiesTest(){
-        propertiesService.propertiesTest();
-    }
-    
-    
-    @Test
-    public void propertiesConfigTest(){
-        propertiesService.propertiesConfigTest();
-    }
+//    @Test
+//    public void propertiesTest(){
+//        propertiesService.propertiesTest();
+//    }
+//
+//
+//    @Test
+//    public void propertiesConfigTest(){
+//        propertiesService.propertiesConfigTest();
+//    }
 }
