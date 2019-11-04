@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.boot.plus.mybatis.dao.TOperationTestMapper" >
+  <resultMap id="BaseResultMap" type="com.boot.plus.mybatis.entity.TOperationTest" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="operation_name" property="operationName" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_operation_test
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.boot.plus.mybatis.entity.TOperationTest" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_operation_test (create_at, operation_name, remark
+      )
+    values (#{createAt,jdbcType=TIMESTAMP}, #{operationName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.boot.plus.mybatis.entity.TOperationTest" >
+    update t_operation_test
+    set create_at = #{createAt,jdbcType=TIMESTAMP},
+      operation_name = #{operationName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, create_at, operation_name, remark
+    from t_operation_test
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, create_at, operation_name, remark
+    from t_operation_test
+  </select>
+</mapper>

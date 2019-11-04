@@ -1,8 +1,4 @@
 spring:
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://101.200.59.148:3306/develop?useUnicode=true&characterEncoding=UTF-8
@@ -30,7 +26,10 @@ logging:
           autoconfigure: ERROR
 server:
   port: 8081
-
+#mybatis:
+#  mapper-locations: com.boot.plus.mybatis.mapper.*.xml
+#  type-aliases-package: com.boot.plus.mybatis.entity
+#  config-locations: classpath:mybatis-generator/generatorConfig.xml
 user:
   name: "马小跳"
   age: 10
