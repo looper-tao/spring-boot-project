@@ -3,6 +3,7 @@ package leetcode.sort;
 import java.util.Arrays;
 
 /**
+ * 快速排序算法
  * @author: yeguxin
  * @date: 2019/11/5
  * @description:
