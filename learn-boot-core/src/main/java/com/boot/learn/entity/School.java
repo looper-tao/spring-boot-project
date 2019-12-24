@@ -1,6 +1,8 @@
 package com.boot.learn.entity;
 
 import com.boot.learn.entity.base.PkNativeID;
+import com.boot.learn.untils.KJsonUtils;
+import com.fasterxml.jackson.annotation.JsonFilter;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -25,4 +27,5 @@ public class School extends PkNativeID {
     
     @Column(name = "create_at")
     private Date createAt;
+    
 }

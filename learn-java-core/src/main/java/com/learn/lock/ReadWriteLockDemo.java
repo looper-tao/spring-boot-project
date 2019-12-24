@@ -1,6 +1,7 @@
 package lock;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
+
+import cn.hutool.core.thread.ThreadFactoryBuilder;
 
 import java.util.Random;
 import java.util.concurrent.*;
@@ -74,7 +75,7 @@ public class ReadWriteLockDemo {
             }
         };
         
-        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("thread-read-write-runner-%d").build();
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().build();//.setNameFormat("thread-read-write-runner-%d").build();
         ExecutorService executorService = new ThreadPoolExecutor(40, 40, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(), namedThreadFactory);
        
         for(int i = 0; i < 20; i++) {

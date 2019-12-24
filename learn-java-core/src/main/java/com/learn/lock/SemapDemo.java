@@ -1,6 +1,6 @@
 package lock;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import cn.hutool.core.thread.ThreadFactoryBuilder;
 
 import java.util.concurrent.*;
 
@@ -32,7 +32,7 @@ public class SemapDemo implements Runnable {
     }
     
     public static void main(String[] args) {
-        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("thread-semap-runner-%d").build();
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().build();
         ExecutorService executorService = new ThreadPoolExecutor(20, 20, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(), namedThreadFactory);
         
         final SemapDemo demo = new SemapDemo();

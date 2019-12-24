@@ -17,6 +17,7 @@ public class QuickSort {
             System.out.print(i+ "    ");
         }
         System.out.println();
+        System.out.println();
         
         // 快速排序
         quickSort(arr,0,arr.length-1);
@@ -53,7 +54,7 @@ public class QuickSort {
             if(l<r){
                 list[l++] = list[r];
             }
-          
+            
             // 因为右边的数字填充到了左边的空闲位置,这时候右边的位置就空闲出来了
             // 这时候从左边找一个比基点数字更大的值,
             // 如果在左边找到了一个比基点大的值,则将在右边的空闲的位置放入在左边找到的比基点大的那个数字
@@ -63,11 +64,11 @@ public class QuickSort {
             if(l<r){
                 list[r--] = list[l];
             }
-           
             
         }
         
         list[l] = num;
+        
         
         // 经过刚刚的操作,就形成了一个以基点为界的数组
         // 基点左边的数字全部小于基点

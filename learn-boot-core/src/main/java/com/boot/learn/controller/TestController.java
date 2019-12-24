@@ -1,5 +1,7 @@
 package com.boot.learn.controller;
 
+import com.boot.learn.entity.School;
+import com.boot.learn.untils.KJsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +18,5 @@ public class TestController {
     public String test() {
         return "SUCCESS";
     }
-    
     
 }
