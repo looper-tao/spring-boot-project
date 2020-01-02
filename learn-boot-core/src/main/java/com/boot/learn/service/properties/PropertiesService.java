@@ -25,7 +25,7 @@ public class PropertiesService {
 //    private String school;
 //
 //    @Value("#{'${user.subject}'.split(',')}")
-//    private List<String> subject;
+//    private list<String> subject;
 //
 //
 //    @Autowired
