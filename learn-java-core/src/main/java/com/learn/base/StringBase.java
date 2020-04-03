@@ -17,9 +17,16 @@ public class StringBase {
     private String a3;
     
     public static void main(String[] args) {
-        StringBase build = StringBase.builder().a1("1")
-            .a2("2").a3(null).build();
-        System.out.println(build);
+//        StringBase build = StringBase.builder().a1("1")
+//            .a2("2").a3(null).build();
+//        System.out.println(build);
+        
+        String str = "2";
+        System.out.println(str.hashCode());
+        int h = str.hashCode();
+        System.out.println(h>>>1);
+        System.out.println((h=str.hashCode()) ^ (h>>>16));
+        System.out.println(((h=str.hashCode()) ^ (h>>>16)) & 15);
     }
 }
 

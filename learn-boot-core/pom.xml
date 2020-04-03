@@ -40,7 +40,7 @@
                     <outputDirectory>
                         build/${profile.env}
                     </outputDirectory>
-                    <fork>true</fork>
+                    <fork>false</fork>
                     <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
                 </configuration>
             </plugin>
@@ -134,13 +134,6 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <version>2.0.3.RELEASE</version>
-            <scope>true</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <!-- Database -->
@@ -170,6 +163,18 @@
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-jdo</artifactId>
             <version>${querydsl.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.java</groupId>
+            <artifactId>sonar-java-plugin</artifactId>
+            <version>4.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.sonarsource.javascript/sonar-javascript-plugin -->
+        <dependency>
+            <groupId>org.sonarsource.javascript</groupId>
+            <artifactId>sonar-javascript-plugin</artifactId>
+            <version>2.14</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

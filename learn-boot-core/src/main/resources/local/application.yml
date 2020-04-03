@@ -19,9 +19,6 @@ spring:
       dle-timeout: 30000
       maximum-pool-size: 15
       connection-init-sql: "SET NAMES utf8mb4"
-  devtools:
-    restart:
-      additional-paths: src/main/java
 logging:
   level:
     org:

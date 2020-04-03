@@ -20,8 +20,8 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
     
-    @RequestMapping(value = "list",method = RequestMethod.GET)
-    public List<Student> list(){
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    public List<Student> list() {
         List<Student> students = studentService.quertDslTest();
         return students;
     }

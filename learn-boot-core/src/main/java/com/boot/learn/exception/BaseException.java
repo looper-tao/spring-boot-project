@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public abstract class BaseException extends RuntimeException {
 
-    protected Integer code;
+    protected final Integer code;
 
     public BaseException(Integer code) {
         this.code = code;
