@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("aop")
 public class AopTestController {
-    @Log(value = "测试方法")
+//    @Log(value = "测试方法")
     @GetMapping(value = "test")
     public void test(@RequestParam("param1") String param1,@RequestParam("param2") String param2){
         System.out.println("controller开始执行逻辑");

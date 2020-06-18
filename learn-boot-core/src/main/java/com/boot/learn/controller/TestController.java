@@ -1,6 +1,7 @@
 package com.boot.learn.controller;
 
 import com.boot.learn.entity.DataWarehouse;
+import com.boot.learn.entity.School;
 import com.boot.learn.service.excel.ExcelHandleService;
 import com.boot.learn.untils.KJsonUtils;
 import jxl.Sheet;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,6 +51,21 @@ public class TestController {
         }
     }
     
+    
+    @RequestMapping(value = "test",method = RequestMethod.GET)
+    public void test1() {
+        School school = new School();
+        school.setName("测试名称");
+        school.setAddress("上海市");
+        school.setCreateAt(new Date());
+        String json = KJsonUtils.toJson(school);
+    
+        Map<String, Object> map = KJsonUtils.toObjectMap(json, String.class, Object.class);
+        
+        System.out.println(map.get("name"));
+        System.out.println(map.get("address"));
+    }
+    
     private int getProductId(DataWarehouse.Grade grade){
         switch(grade){
             case ADULT:
@@ -68,5 +85,7 @@ public class TestController {
             default:
                 return 0;
         }
+        
+        
     }
 }
