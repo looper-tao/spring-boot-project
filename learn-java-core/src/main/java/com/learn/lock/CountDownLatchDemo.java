@@ -7,6 +7,7 @@ import java.util.concurrent.*;
 
 /**
  * 倒计数器
+ *
  * @Author: taozhengzhi
  * @Date: 2019/4/2 下午5:44
  * @Version 1.0
@@ -27,7 +28,7 @@ public class CountDownLatchDemo implements Runnable {
             System.out.println("check complete!");
             //通知countDownLatch,一个线程已经完成了任务,倒计数器减1
             end.countDown();
-        } catch (InterruptedException e) {
+        } catch(InterruptedException e) {
             e.printStackTrace();
         }
     }
@@ -40,13 +41,14 @@ public class CountDownLatchDemo implements Runnable {
          */
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().build();//.setNameFormat("thread-count-down-latch-runner-%d").build();
         ExecutorService executorService = new ThreadPoolExecutor(10, 10, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(), namedThreadFactory);
-    
-        for (int i = 0; i < 10; i++) {
+        
+        for(int i = 0; i < 10; i++) {
             executorService.submit(demo);
         }
         //要求主线程等待所有检查任务全部完成(10个任务全部完成后),主线程才能继续执行
         end.await();
         System.out.println("Fire!");
         executorService.shutdown();
+        
     }
 }

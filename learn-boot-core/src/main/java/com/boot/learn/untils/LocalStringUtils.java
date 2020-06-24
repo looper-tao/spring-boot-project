@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  * @Date: 2019/6/24 下午2:27
  * @Version 1.0
  */
-public class StringUtils {
+public class LocalStringUtils {
     private static final Pattern p = Pattern.compile("\\s*|\t|\r|\n");
     
     public static String replaceBlank(String str) {

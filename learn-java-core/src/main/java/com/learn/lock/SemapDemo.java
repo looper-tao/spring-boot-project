@@ -6,6 +6,7 @@ import java.util.concurrent.*;
 
 /**
  * 信号量
+ *
  * @Author: taozhengzhi
  * @Date: 2019/4/2 下午2:24
  * @Version 1.0
@@ -39,6 +40,7 @@ public class SemapDemo implements Runnable {
         for(int i = 0; i < 20; i++) {
             executorService.submit(demo);
         }
+        
         
     }
     

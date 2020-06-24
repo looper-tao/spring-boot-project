@@ -14,6 +14,7 @@ public class Area implements Cloneable{
     
     @Override
     protected Area clone() throws CloneNotSupportedException {
+        // 浅拷贝
         return (Area) super.clone();
     }
 }

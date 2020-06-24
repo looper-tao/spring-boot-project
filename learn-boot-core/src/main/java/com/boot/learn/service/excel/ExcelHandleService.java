@@ -1,7 +1,7 @@
 package com.boot.learn.service.excel;
 
 import com.boot.learn.exception.InvalidParamException;
-import com.boot.learn.untils.StringUtils;
+import com.boot.learn.untils.LocalStringUtils;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -79,7 +79,7 @@ public class ExcelHandleService {
         
         for(int i = 2; i < 2200; i++) {
             
-            String firstValue = StringUtils.replaceBlank(sheet.getCell(0, i).getContents().trim());
+            String firstValue = LocalStringUtils.replaceBlank(sheet.getCell(0, i).getContents().trim());
             
             String secondValue = sheet.getCell(1, i).getContents().trim();
             

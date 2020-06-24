@@ -21,7 +21,7 @@ public class LeetCode42 {
     }
     
     /**
-     * LeetCode 42 接雨水
+     * LeetCode20 42 接雨水
      *
      * @param height
      * @return
