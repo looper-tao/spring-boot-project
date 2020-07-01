@@ -45,6 +45,7 @@ public class LeetCode39 {
     
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         
+        Arrays.sort(candidates);
         dfs(candidates, 0, 0, 0, target);
         
         return resultList;
@@ -62,6 +63,9 @@ public class LeetCode39 {
         int len = candidates.length;
         
         for(int i = left; i < len; i++) {
+            if((sum+candidates[i]) > target){
+                return;
+            }
             valueList.add(candidates[i]);
             dfs(candidates, i, index + 1, sum + candidates[i], target);
             valueList.remove(index);
