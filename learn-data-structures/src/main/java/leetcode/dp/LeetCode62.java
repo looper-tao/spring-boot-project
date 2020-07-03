@@ -1,4 +1,4 @@
-package leetcode.其他;
+package leetcode.dp;
 
 /**
  * @author: yeguxin
