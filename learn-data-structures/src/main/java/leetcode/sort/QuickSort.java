@@ -78,4 +78,6 @@ public class QuickSort {
         // 将基点右边的那一段为一个数组进行刚刚的操作,一直递归下去
         quickSort(list,l+1,right);
     }
+    
+    
 }
