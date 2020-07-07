@@ -65,7 +65,7 @@ public class HeapSort {
         while(left < size) {
             int largestIndex;
             //判断孩子中较大的值的索引（要确保右孩子在size范围之内）
-            if(arr[left] < arr[right] && right < size) {
+            if(right < size && arr[left] < arr[right]) {
                 largestIndex = right;
             }else {
                 largestIndex = left;
