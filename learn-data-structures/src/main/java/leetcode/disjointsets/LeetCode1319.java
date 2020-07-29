@@ -62,14 +62,11 @@ public class LeetCode1319 {
             unionMap.put(i, i);
         }
         for(int i = 0; i < connections.length; i++) {
-            Integer v1 = find(connections[i][0]);
-            Integer v2 = find(connections[i][1]);
-            if(v1.compareTo(v2) == 0){
+            if(find(connections[i][0]).compareTo(find(connections[i][1])) == 0){
                 continue;
             }
             union(connections[i][0], connections[i][1]);
         }
-        unionMap.keySet().forEach(this::find);
         return (int) unionMap.keySet().stream().filter(integer -> {
             return unionMap.get(integer).compareTo(integer) == 0;
         }).count() - 1;
