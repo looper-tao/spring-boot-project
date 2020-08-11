@@ -18,9 +18,12 @@ public class FairLock implements Runnable {
             try{
                 //获得锁,如果锁已经被占用,则等待
                 lock.lock();
+                Thread.sleep(1000L);
                 System.out.println(Thread.currentThread().getName()+"获得了锁!!!");
     
-            }finally {
+            } catch(InterruptedException e) {
+                e.printStackTrace();
+            } finally {
                 lock.unlock();
             }
         }

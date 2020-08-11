@@ -22,9 +22,10 @@ public class TimeLock implements Runnable {
             //  如果锁没有被其他线程占用,则申请锁成功,并立即返回true,
             //  如果锁被其他线程占用,则当前线程不会进行等待,而是立即返回false.
             //这种模式不会引起线程等待,因此不会产生死锁.
-            if(lock.tryLock(5, TimeUnit.SECONDS)){
+            if(lock.tryLock(2001, TimeUnit.MILLISECONDS)){
+                System.out.println(Thread.currentThread().getName()+"正在运行!");
                 //占用可锁之后 sleep10秒,所以另一个线程无法在5秒的时间内获得锁,因此请求锁会失败
-                Thread.sleep(10000L);
+                Thread.sleep(1000L);
             }else {
                 System.out.println("get lock failed !!!");
             }

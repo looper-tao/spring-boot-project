@@ -32,6 +32,7 @@ public class ReadWriteLockDemo {
             //模拟读操作
             System.out.println(Thread.currentThread().getName() + "正在进行读操作!!!");
             Thread.sleep(1000L);
+            System.out.println("value = "+value);
             return value;
         } catch(InterruptedException e) {
             e.printStackTrace();
@@ -47,6 +48,7 @@ public class ReadWriteLockDemo {
             System.out.println(Thread.currentThread().getName() + "正在进行写操作!!!");
             Thread.sleep(1000L);
             value = index;
+            System.out.println("value = "+value);
         } catch(InterruptedException e) {
             e.printStackTrace();
         } finally {
@@ -62,7 +64,7 @@ public class ReadWriteLockDemo {
             @Override
             public void run() {
 //                readWriteLockDemo.handleRead(readLock);
-                readWriteLockDemo.handleRead(lock);
+                readWriteLockDemo.handleRead(readLock);
             }
         };
         
@@ -71,18 +73,19 @@ public class ReadWriteLockDemo {
             @Override
             public void run() {
 //                readWriteLockDemo.handleWrite(writeLock, new Random().nextInt());
-                readWriteLockDemo.handleWrite(lock, new Random().nextInt());
+                readWriteLockDemo.handleWrite(writeLock, new Random().nextInt(100));
             }
         };
         
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().build();//.setNameFormat("thread-read-write-runner-%d").build();
         ExecutorService executorService = new ThreadPoolExecutor(40, 40, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(), namedThreadFactory);
-       
+    
         for(int i = 0; i < 20; i++) {
             executorService.submit(readRunnale);
         }
         for(int i = 0; i < 20; i++) {
             executorService.submit(writeRunnable);
         }
+        
     }
 }

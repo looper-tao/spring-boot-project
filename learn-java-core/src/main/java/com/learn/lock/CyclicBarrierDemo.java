@@ -68,7 +68,7 @@ public class CyclicBarrierDemo {
     public static void main(String[] args) {
         final int n = 10;
         boolean flag = false;
-        ThreadFactory cyclicBarrierThreadFactory = new ThreadFactoryBuilder().build();//.setNameFormat("thread-cyclic-barrier-%d").build();
+        ThreadFactory cyclicBarrierThreadFactory = new ThreadFactoryBuilder().build();
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(10, 10, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(), cyclicBarrierThreadFactory);
         
         CyclicBarrier cyclic = new CyclicBarrier(n, new BarrierRun(flag, n));
@@ -82,5 +82,4 @@ public class CyclicBarrierDemo {
         }
         
     }
-    
 }

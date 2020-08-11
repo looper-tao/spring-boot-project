@@ -39,7 +39,7 @@ public class CountDownLatchDemo implements Runnable {
          * 在火箭发射前,为了保证万无一失,往往还要对各项设备,仪器进行检查.
          * 只有等所有检查前部完成后,在执行点火操作.
          */
-        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().build();//.setNameFormat("thread-count-down-latch-runner-%d").build();
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().build();
         ExecutorService executorService = new ThreadPoolExecutor(10, 10, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(), namedThreadFactory);
         
         for(int i = 0; i < 10; i++) {
