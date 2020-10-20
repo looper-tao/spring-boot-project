@@ -14,7 +14,7 @@ import java.util.List;
  * @description:
  */
 @Service
-public class PersonImplService extends ServiceImpl<TPersonMapper, TPerson> implements PersonService {
+public class PersonServiceImpl extends ServiceImpl<TPersonMapper, TPerson> implements PersonService {
 
     @Override
     public List<TPerson> selectAll(){

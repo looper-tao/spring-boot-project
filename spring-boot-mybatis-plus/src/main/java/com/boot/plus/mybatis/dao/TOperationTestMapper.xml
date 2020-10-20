@@ -20,6 +20,7 @@
     values (#{createAt,jdbcType=TIMESTAMP}, #{operationName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
       )
   </insert>
+
   <update id="updateByPrimaryKey" parameterType="com.boot.plus.mybatis.entity.TOperationTest" >
     update t_operation_test
     set create_at = #{createAt,jdbcType=TIMESTAMP},
@@ -27,6 +28,7 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select id, create_at, operation_name, remark
     from t_operation_test

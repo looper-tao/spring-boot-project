@@ -257,7 +257,17 @@ public class DateUntils {
     public static Date theDayLater(Date date, long num){
         return Date.from(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).plusDays(num).atZone(ZoneId.systemDefault()).toInstant());
     }
-
+    
+    public static Date theMonthLater(Date date, long num){
+        return Date.from(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).plusMonths(num).atZone(ZoneId.systemDefault()).toInstant());
+    }
+    
+    
+    public static void main(String[] args) {
+        String time = "2020-03-01 00:00:00";
+        Date date = parseDate(time, DateTimeFormatterEnum.FORMAT_DATE_TIME_STYLE_1);
+        System.out.println(format(theMonthLater(date,1),DateTimeFormatterEnum.FORMAT_DATE_TIME_STYLE_1));
+    }
     
     
     /**

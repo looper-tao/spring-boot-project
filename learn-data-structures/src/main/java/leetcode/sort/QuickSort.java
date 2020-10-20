@@ -10,6 +10,11 @@ import java.util.Arrays;
  */
 public class QuickSort {
     public static void main(String[] args) {
+        long a = 10000;
+        Long b = Long.valueOf(10000);
+        System.out.println(a == b);
+       
+       
         int[] arr = {10,9,12,8,14,13,7,11,6,5,4,3,2,1};
         
         System.out.println("排序前");
