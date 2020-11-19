@@ -1,5 +1,8 @@
 package leetcode.字符串问题;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 题目描述:
  *
@@ -23,11 +26,40 @@ package leetcode.字符串问题;
  *      请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
  */
 public class LeetCode3 {
+    private int[] flag;
+    
     public static void main(String[] args) {
         LeetCode3 leetCode3 = new LeetCode3();
-        String s = "abbbbbba";
-        int ans = leetCode3.lengthOfLongestSubstring(s);
+        String s = "abcabcbb";
+        int ans = leetCode3.lengthOfLongestSubstring2(s);
         System.out.println(ans);
+    }
+    
+    /**
+     * LeetCode20 3. 无重复字符的最长子串
+     *
+     * 解题思路: 滑动窗口思想一次遍历
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring2(String s){
+        flag = new int[200];
+        for(int i=0;i<200;i++){
+            flag[i] = -1;
+        }
+        
+        char[] chars = s.toCharArray();
+        int max = 0;
+        int left = 0;
+        for(int i =0;i<chars.length;i++){
+            if(flag[chars[i]] >= 0){
+                left = Math.max(left,flag[chars[i]] + 1);
+            }
+            flag[chars[i]] = i;
+            max = Math.max(max ,(i-left+1));
+            System.out.println("i = "+i+ "  left = "+left);
+        }
+        return max;
     }
     
     /**
@@ -56,4 +88,5 @@ public class LeetCode3 {
         }
         return maxNum;
     }
+   
 }
