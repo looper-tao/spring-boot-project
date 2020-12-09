@@ -6,7 +6,7 @@ spring:
       ddl-auto: update
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/develop?useUnicode=true&?useSSL=false&characterEncoding=UTF-8
+    url: jdbc:mysql://101.200.59.148:3306/develop?useUnicode=true&characterEncoding=UTF-8&useSSL=true
     username: root
     password: '!@#456Poiuy'
     type: com.zaxxer.hikari.HikariDataSource
@@ -24,10 +24,12 @@ server:
   port: 8081
 logging:
   config: classpath:logback.xml
-
-#user:
-#  name: "马小跳"
-#  age: 10
-#  school: "向阳小学"
-#  subject: "语文","数学","英语"
-#  achievement: ["language":10,"math":20,"english":30]
+user:
+  name: "马小跳"
+  age: 10
+  school: "向阳小学"
+  subject: 语文,数学,英语
+  achievement: {"language":10,"math":20,"english":30}
+mybatis-plus:
+  mapper-locations: classpath:com.boot.plus.mybatis.dao/*.xml
+  type-aliases-package: com.boot.plus.mybatis.dao
