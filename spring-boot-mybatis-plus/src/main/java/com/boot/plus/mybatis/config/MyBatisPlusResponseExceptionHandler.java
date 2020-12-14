@@ -22,6 +22,7 @@ public class MyBatisPlusResponseExceptionHandler {
     public Map<String, String> handleOperationFailedException(Exception e) {
         Map<String, String> result = new TreeMap<>();
         result.put("message", e.getMessage());
+        System.out.println("米好 :");
         return result;
     }
 }

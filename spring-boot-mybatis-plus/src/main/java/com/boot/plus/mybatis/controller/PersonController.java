@@ -35,6 +35,7 @@ public class PersonController {
     public Boolean test(Integer num){
         int result = 100 / num;
         log.info("result = "+result);
+        System.out.println("res +"+num);
         return Boolean.TRUE;
     }
 
