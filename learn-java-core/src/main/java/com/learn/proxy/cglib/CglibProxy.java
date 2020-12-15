@@ -20,7 +20,8 @@ public class CglibProxy implements MethodInterceptor {
     @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
         before();
-        method.invoke(target,objects);
+//        method.invoke(target,objects);
+        methodProxy.invokeSuper(o,objects);
         after();
         return null;
     }
@@ -36,10 +37,11 @@ public class CglibProxy implements MethodInterceptor {
     
     public Object getCglibProxy(Object targetObject){
         this.target = targetObject;
+        // 实例化增强器
         Enhancer enhancer = new Enhancer();
         // 设置父类,因为Cglib是针对指定的类生成一个子类.需要指定父类
         enhancer.setSuperclass(targetObject.getClass());
-        // 设置回调
+        // 设置回调,回调的实现类
         enhancer.setCallback(this);
         // 创建并返回CglibProxy对象
         return enhancer.create();
