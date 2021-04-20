@@ -3,6 +3,7 @@ package com.boot.learn.controller;
 import com.boot.learn.entity.DataWarehouse;
 import com.boot.learn.entity.School;
 import com.boot.learn.service.excel.ExcelHandleService;
+import com.boot.learn.service.listener.TestListenerService;
 import com.boot.learn.untils.KJsonUtils;
 import jxl.Sheet;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +23,14 @@ import java.util.Map;
 @RestController
 @RequestMapping("boot/test")
 public class TestController {
+    private final ExcelHandleService excelHandleService;
+    private final TestListenerService testListenerService;
+    
     @Autowired
-    private ExcelHandleService excelHandleService;
+    public TestController(ExcelHandleService excelHandleService, TestListenerService testListenerService) {
+        this.excelHandleService = excelHandleService;
+        this.testListenerService = testListenerService;
+    }
     
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String test() {
@@ -65,6 +72,15 @@ public class TestController {
         System.out.println(map.get("name"));
         System.out.println(map.get("address"));
     }
+    
+    
+    
+    @RequestMapping(value = "listener",method = RequestMethod.GET)
+    public void listenerTest(){
+        testListenerService.testListener();
+    }
+    
+    
     
     private int getProductId(DataWarehouse.Grade grade){
         switch(grade){
